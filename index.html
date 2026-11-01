@@ -149,44 +149,26 @@ footer{text-align:center;padding:28px 16px 38px;color:#9a849a;font-size:.85rem}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-let audioContext = null, musicTimer = null, musicOn = false, noteIndex = 0;
-const melody = [523.25,659.25,783.99,659.25,587.33,659.25,698.46,783.99,659.25,587.33,523.25,392.00];
-function playNote(freq, start, duration, volume=0.035) {
-  const osc = audioContext.createOscillator(), gain = audioContext.createGain();
-  osc.type = "sine"; osc.frequency.value = freq;
-  gain.gain.setValueAtTime(0.0001, start);
-  gain.gain.exponentialRampToValueAtTime(volume, start + 0.04);
-  gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-  osc.connect(gain); gain.connect(audioContext.destination);
-  osc.start(start); osc.stop(start + duration + 0.03);
-}
-function playPhrase() {
-  if (!musicOn || !audioContext) return;
-  const now = audioContext.currentTime + 0.03;
-  for (let i=0; i<melody.length; i++) {
-    playNote(melody[i], now + i*0.34, 0.31, 0.025);
-    if (i % 3 === 0) playNote(melody[i]/2, now + i*0.34, 0.5, 0.012);
-  }
-}
+const birthdayAudio = new Audio("Lagumbanis.mp3");
+birthdayAudio.loop = true;
+
 async function toggleMusic() {
   const button = document.getElementById("musicButton");
-  if (!musicOn) {
+  const label = document.getElementById("musicLabel");
+
+  if (birthdayAudio.paused) {
     try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (!AudioCtx) { showToast("Browser ini belum mendukung musik otomatis."); return; }
-      if (!audioContext) audioContext = new AudioCtx();
-      await audioContext.resume();
-      musicOn = true; playPhrase();
-      musicTimer = setInterval(playPhrase, melody.length * 340 + 250);
-      document.getElementById("musicLabel").textContent = "Pause little tune";
-      button.setAttribute("aria-pressed","true");
+      await birthdayAudio.play();
+      label.textContent = "Pause little tune";
+      button.setAttribute("aria-pressed", "true");
       showToast("Little birthday tune is playing ♫");
-    } catch (e) { showToast("Musik belum bisa diputar. Coba tekan sekali lagi ya."); }
+    } catch (e) {
+      showToast("Musik belum bisa diputar. Coba lagi ya ♡");
+    }
   } else {
-    musicOn = false; clearInterval(musicTimer);
-    if (audioContext) await audioContext.suspend();
-    document.getElementById("musicLabel").textContent = "Play little tune";
-    button.setAttribute("aria-pressed","false");
+    birthdayAudio.pause();
+    label.textContent = "Play little tune";
+    button.setAttribute("aria-pressed", "false");
     showToast("Musik dijeda ♡");
   }
 }
