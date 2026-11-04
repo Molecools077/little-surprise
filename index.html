@@ -139,11 +139,11 @@ footer{text-align:center;padding:28px 16px 38px;color:#9a849a;font-size:.85rem}
         <span class="lock" id="secretIcon">🔐</span>
         <div class="kicker">psst... secret corner</div>
         <h2 class="section-title">Buka ini kalo penasaran!</h2>
-        <p class="section-sub" style="margin-bottom:22px">TAPI HARUS KLIK! Wajib plis aku susah buatnya lho Mba Nisaaa 👀</p>
+        <p class="section-sub" style="margin-bottom:22px">TAPI HARUS KLIK! Wajib plis, aku susah buatnya lho Mba Nisaaa 👀</p>
         <button class="btn btn-primary" id="secretButton" onclick="revealSecret()">Jangan dipencet… eh pencet! 🎁</button>
         <div class="secret-message" id="secretMessage">
-          <div style="font-size:2rem">💐🥹💖</div>
-          <h3 style="margin:10px 0">YEAYY, PY BIRTHDAY MBA NISAAA!</h3>
+          <div style="font-size:2rem">💐🥳💖</div>
+          <h3 style="margin:10px 0">YEAYY, PYBIRTHDAY MBA NISAAA!</h3>
           <p>Ini doa dari aku bocil kematian🥰🥳🤪 Semoga ditaun ini semua yang lagi mba doain tercapai semua yaa, semoga tahun ini dan kedepannya lebih baik dari sebelumnya. KAYARAYA + BAHAGIA + SEHAT SELALU.AAMIIIN. Sisanya mba doa sendiri yaa kan udah gede, aku aamiinin💖</</p>
           <strong> ~Mole ♡</strong>
         </div>
@@ -200,7 +200,7 @@ function revealSecret(){
   const message=document.getElementById("secretMessage");
   message.classList.toggle("open",secretOpen);
   document.getElementById("secretIcon").textContent=secretOpen?"💝":"🔐";
-  document.getElementById("secretButton").textContent=secretOpen?"Baca lagi, Mba ♡":"Buka kejutan rahasia 🎁";
+  document.getElementById("secretButton").textContent=secretOpen?"Close kalo gak sayang ♡":"Buka Ayo Mba 🎁";
   if(secretOpen) celebrate();
 }
 function showToast(text){
